@@ -21,26 +21,22 @@ class Twitter_IndexController extends Omeka_Controller_AbstractActionController
      * Configure a new import.
      */
     public function indexAction()    
-     {        
+    {        
         $form = $this->_getMainForm();
         $this->view->form = $form;
         $iterator = new TwitterImport_RowIterator;
 			$formattedrow = $iterator->_formatRow();
 			
-		
-			
-
         if (!$this->getRequest()->isPost()) {
             return;
-      
         }
      
-         if (!$form->isValid($this->getRequest()->getPost())) {
+        if (!$form->isValid($this->getRequest()->getPost())) {
             $this->_helper->flashMessenger(__('Invalid form input. Please see errors below and try again.'), 'error');
             return;
         }
         
-         if (!$form->JSON_file->receive()) {
+        if (!$form->JSON_file->receive()) {
             $this->_helper->flashMessenger(__('Error uploading file. Please try again.'), 'error');
             return;
         } 
@@ -53,13 +49,11 @@ class Twitter_IndexController extends Omeka_Controller_AbstractActionController
         $this->session->filePath = $filePath;  
         $this->session->itemsArePublic = $form->getValue('items_are_public');
         $this->session->ownerId = $this->getInvokeArg('bootstrap')->currentuser->id;
-		
-		
 
         $this->_helper->redirector->goto('process');
     }                 
 	
-  	   public function processAction()
+  	 public function processAction()
      {
      
 		if (!$this->_sessionIsValid()) {
@@ -84,8 +78,6 @@ class Twitter_IndexController extends Omeka_Controller_AbstractActionController
 			}
 			
 			$this->session->unsetAll();
-			
-			
 			
 			$this->_helper->redirector->goto('browse');
 			
@@ -176,8 +168,8 @@ class Twitter_IndexController extends Omeka_Controller_AbstractActionController
 	 /**
      * Dispatch an import task.
      *
-     * @param CsvImport_Import $csvImport The import object
-     * @param string $method The method name to run in the CsvImport_Import object
+     * @param TwitterImport_Import $TwitterImport The import object
+     * @param string $method The method name to run in the TwitterImport_Import object
      */    
     protected function _dispatchImportTask($TwitterImport, $method=null) 
     {        
@@ -188,8 +180,8 @@ class Twitter_IndexController extends Omeka_Controller_AbstractActionController
         
         $options = array(
             'importId' => $TwitterImport->id,
-            'memoryLimit' => @$csvConfig['memoryLimit'],
-            'batchSize' => @$csvConfig['batchSize'],
+            'memoryLimit' => @$twitterConfig['memoryLimit'],
+            'batchSize' => @$twitterConfig['batchSize'],
             'method' => $method,
         );        
         
@@ -198,8 +190,8 @@ class Twitter_IndexController extends Omeka_Controller_AbstractActionController
         $jobDispatcher->sendLongRunning('TwitterImport_ImportTask',
             array(
                 'importId' => $TwitterImport->id,
-                'memoryLimit' => @$csvConfig['memoryLimit'],
-                'batchSize' => @$csvConfig['batchSize'],
+                'memoryLimit' => @$twitterConfig['memoryLimit'],
+                'batchSize' => @$twitterConfig['batchSize'],
                 'method' => $method,
             )
         );

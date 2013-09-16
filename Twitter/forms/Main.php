@@ -132,7 +132,7 @@ class Twitter_Form_Main extends Omeka_Form
                         : $postMaxSize;
 
         // If the plugin max file size setting is lower, choose it as the strict max size
-        $pluginMaxSizeRaw = trim(get_option(CsvImportPlugin::MEMORY_LIMIT_OPTION_NAME));
+        $pluginMaxSizeRaw = trim(get_option(TwitterPlugin::MEMORY_LIMIT_OPTION_NAME));
         if ($pluginMaxSizeRaw != '') {
             if ($pluginMaxSize = $this->_getBinarySize($pluginMaxSizeRaw)) {
                 $strictMaxSize = $strictMaxSize->compare($pluginMaxSize) > 0
