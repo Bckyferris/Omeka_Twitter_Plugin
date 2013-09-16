@@ -1,0 +1,78 @@
+#twitter-table-head th a:after{
+    width: 10px;
+    height: 10px;
+    content: url('../images/sort.png');
+    display: inline-block;
+    line-height: 10px;
+    padding-bottom: 3px;
+    padding-left: 3px;
+}
+
+#twitter-table-head th.desc a:after { content: url('../images/desc.png'); }
+#twitter-table-head th.asc a:after { content: url('../images/asc.png'); }
+
+#twitter-table td{
+    padding: 4px;
+    border: 1px solid #ccc; 
+    font-size: 1.2em; 
+}       
+
+#twitter-table th{
+    padding: 4px;
+    font-size: 1.5em;
+    font-family: Francois One;
+    border: 1px solid #ccc;
+}
+
+#twitter-table-head th, #twitter-table-head a{
+    background: #00458c;
+    color: #FFDD00;
+    text-decoration: none;
+
+}
+
+#twitter-table tr:nth-child(even) {
+    background: #F4F4F4;
+}
+#twitter-table{
+    overflow: scroll;
+}
+
+#twitterimport {
+  overflow: visible;
+}
+
+/* id=section-nav changed to class=section-nav to enable it to work with
+ * Zend_Navigation.
+ */
+.horizontal-nav ul.section-nav {
+    font-size: 1.1em;
+    margin: 0;
+    padding: 9px 0 12px;
+}
+
+.horizontal-nav ul.section-nav li {
+    display: inline;
+}
+
+.horizontal-nav ul.section-nav a {
+    color: #446677;
+    padding: 9px 12px 12px;
+    text-decoration: none;
+    width: 126px;
+}
+/* Duplicate of "li.current" definition.  Zend_Navigation uses "active" for class
+ * instead of current.
+ */
+.horizontal-nav ul.section-nav li.active a {
+    background: none repeat scroll 0 0 #D7D5C4;
+    border-color: #D7D5C4;
+    border-style: solid;
+    border-width: 0 0 1px;
+    color: #333333;
+    font-weight: bold;
+}
+
+div.twitterimportnext {
+  clear:both;
+}
